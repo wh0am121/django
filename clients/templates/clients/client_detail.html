@@ -1,0 +1,76 @@
+{% extends 'clients/layout.html' %}
+
+{% load static %}
+
+{% block navigation %}
+<li><a  href="{% url 'clients:index' %}">About the application</a></li>
+<li><a class="active" href="{% url 'clients:list-all-clients' %}">Clients</a></li>
+{% endblock navigation %}
+
+{% block title %}Insurance Details{% endblock title %}
+
+{% block section %}
+
+    <div class="page-path">
+        <a href="{% url 'clients:index' %}">Home</a>
+        <p>&rsaquo;</p>
+        <a href="{% url 'clients:list-all-clients' %}">List of insured persons</a> <p>&rsaquo;</p>
+        <p> {{ client.name }} {{ client.surname }}</p>
+    </div>
+
+
+    <div class="client-detail">
+        <img class="client-detail-portrait" src="{% static 'clients/user_icon.png' %}" height="150px" alt="">
+        <h2 id="client-detail-name">{{ client.name }} {{ client.surname }}</h2>
+        <div id="client-detail-address">
+            <p>{{ client.street_address }}</p>
+            <p>{{ client.city }}</p>
+            <p>{{ client.postal_code }}</p>
+        </div>
+        <div id="client-detail-contact">
+            <p>{{ client.email }}</p>
+            <p>{{ client.phone_number }}</p>
+        </div>
+    </div>
+
+
+    <div class="table-content-box">
+        <div class="content-box-header table-header">
+            <h2>Contractual insurance</h2>
+            {% if user.is_staff %}
+            <a href="{% url 'clients:create-insurance' pk=client.id %}"><img src="{% static 'clients/add_circle_blue.png' %}" alt="add circle" height="25px">Add Insurance</a>
+            {% endif %}
+        </div>
+
+        <div class="custom-table">
+            <table>
+                {% if insurances|length > 0 %}
+                <tr>
+                    <th>Insurance type</th>
+                    <th>Sum insured</th>
+                    <th>Action</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                {% endif %}
+                {% for insurance in insurances %}
+                <tr>
+                    <td><a href="{% url 'clients:insurance-detail' pk=client.id id=insurance.id %}">{{ insurance.get_insurance_type_display }} ({{ insurance.subject }})</a></td>
+                    <td>{{ insurance.amount }} tenge</td>
+                    <td>from {{ insurance.date_from|date:"d.m. Y" }} to {{ insurance.date_to|date:"d.m. Y" }}</td>
+                    {% if user.is_staff %}
+                    <td class="table-button"><a href="{% url 'clients:edit-insurance' pk=client.id id=insurance.id %}"><img src="{% static 'clients/edit.png' %}" height="25px" alt="edit" title="Edit"></a></td>
+                    <td class="table-button"><a href="{% url 'clients:delete-insurance' pk=client.id id=insurance.id %}"><img src="{% static 'clients/delete.png' %}" height="25px" alt="delete" title="Delete"></a></td>
+                    {% else %}
+                    <td></td>
+                    <td></td>
+                    {% endif %}
+                </tr>
+                {% empty %}
+                    <p class="empty-message">The client does not have insurance.</p>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+{% endblock section %}

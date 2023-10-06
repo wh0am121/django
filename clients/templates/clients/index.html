@@ -1,0 +1,22 @@
+{% extends 'clients/layout.html' %}
+{% load static %}
+{% block navigation %}
+<li><a class="active" href="{% url 'clients:index' %}">About the application</a></li>
+<li><a href="{% url 'clients:list-all-clients' %}">Clients</a></li>
+{% endblock navigation %}
+
+{% block section %}
+
+    <h1>Welcome to the insurance management system</h1>
+    <img src="{% static 'clients/pic.png' %}" width="900px">
+    <p><b> Our user-friendly platform provides you with all the tools you need to stay organized and in control of your
+        insurance policies. Simplify your insurance management and experience peace of mind with our efficient and
+        reliable system. Get started today and let us handle the complexities while you focus on what matters most.
+    </b></p>
+
+
+{% endblock section %}
+
+
+
+

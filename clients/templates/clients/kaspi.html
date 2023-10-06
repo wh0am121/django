@@ -1,0 +1,19 @@
+{% extends 'clients/layout.html' %}
+
+{% load static %}
+
+{% block title %}Payment{% endblock title %}
+
+{% block navigation %}
+<li><a  href="{% url 'clients:index' %}">About the application</a></li>
+<li><a class="active" href="{% url 'clients:list-all-clients' %}">Clients</a></li>
+{% endblock navigation %}
+
+{% block section %}
+<h1>KASPI QR payment</h1><hr>
+    <img src="{% static 'clients/qr.png' %}" alt="QR">
+    <form action="payments" target="_blank">
+   <button>Confirm</button>
+  </form>
+
+{% endblock section %}

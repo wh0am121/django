@@ -1,0 +1,18 @@
+{% extends 'clients/layout.html' %}
+
+{% block title %}Edit client{% endblock title %}
+
+{% block navigation %}
+<li><a  href="{% url 'clients:index' %}">About the application</a></li>
+<li><a class="active" href="{% url 'clients:list-all-clients' %}">Clients</a></li>
+{% endblock navigation %}
+
+{% block section %}
+<h1>Editing a client</h1><hr>
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="custom-btn" type="submit" value="Edit client">
+    </form>
+
+{% endblock section %}

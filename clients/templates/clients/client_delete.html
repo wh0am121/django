@@ -1,0 +1,14 @@
+{% extends 'clients/layout.html' %}
+
+{% block title %}Delete client{% endblock title %}
+
+{% block section %}
+
+    <p>Are you sure you want to delete this client? ({{ client.name }} {{ client.surname }})</p>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <input class="custom-btn" type="submit" value="Delete client">
+    </form>
+
+{% endblock section %}

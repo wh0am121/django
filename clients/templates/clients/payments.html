@@ -1,0 +1,59 @@
+{% extends 'clients/layout.html' %}
+
+{% load static %}
+
+{% block title %}Insurance details{% endblock title %}
+
+{% block navigation %}
+<li><a  href="{% url 'clients:index' %}">About the application</a></li>
+<li><a class="active" href="{% url 'clients:list-all-clients' %}">Clients</a></li>
+{% endblock navigation %}
+
+{% block section %}
+
+<div class="page-path">
+    <a href="{% url 'clients:index' %}">Home</a>
+    <p>&rsaquo;</p>
+    <a href="{% url 'clients:list-all-clients' %}">List of insured persons</a>
+    <p>&rsaquo;</p>
+    <a href="{% url 'clients:client-detail' client.id %}">{{ client.name }} {{ client.surname }}</a>
+    <p>&rsaquo;</p>
+    <p>{{ insurance.get_insurance_type_display }}</p>
+</div>
+
+<div class="secondary-info-box">
+
+    <div class="content-box-header">
+        <h2>{{ insurance.get_insurance_type_display }}</h2>
+    </div>
+
+
+    <table>
+        <tr>
+            <td>Client:</td>
+            <td>{{ client.name }} {{ client.surname }}</td>
+        </tr>
+        <tr>
+            <td>Subject of insurance:</td>
+            <td>{{ insurance.subject }}</td>
+        </tr>
+        <tr>
+            <td>Sum insured:</td>
+            <td>{{ insurance.amount }} тг</td>
+        </tr>
+        <tr>
+            <td>Insured from:</td>
+            <td>{{ insurance.date_from|date:"d.m. Y" }}</td>
+        </tr>
+        <tr>
+            <td>Insured to:</td>
+            <td>{{ insurance.date_to|date:"d.m. Y" }}</td>
+        </tr>
+    </table>
+</div>
+
+<div class="payments">
+    <h3>Successfully paid</h3>
+</div>
+
+{% endblock section %}

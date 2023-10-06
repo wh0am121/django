@@ -1,0 +1,24 @@
+{% extends 'clients/layout.html' %}
+
+{% block title %}Sign in{% endblock title %}
+
+{% block section %}
+
+    {% if user.is_authenticated %}
+        <p>You are currently logged in.</p>
+        <p>You may not have permission to access the page you are looking for.</p><br>
+        <a class="custom-btn" href="{% url 'clients:index' %}">&larr; Back to the home page.</a>
+    {% else %}
+        <h1>Sign in</h1>
+        <hr>
+        <form action="" method="post" autocomplete="off">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input class="custom-btn" type="submit" value="Sign in">
+        </form>
+
+    <p>Don't have an account? Register <a href="/register"><b>here</b></a></p> <br>
+    {% endif %}
+
+
+{% endblock section %}

@@ -1,0 +1,19 @@
+{% extends 'clients/layout.html' %}
+
+{% block title %}Delete insurance{% endblock title %}
+
+{% block navigation %}
+<li><a  href="{% url 'clients:index' %}">About the application</a></li>
+<li><a class="active" href="{% url 'clients:list-all-clients' %}">Clients</a></li>
+{% endblock navigation %}
+
+{% block section %}
+
+    <p>Are you sure you want to cancel this insurance? ({{ insurance.get_insurance_type_display }} - {{ insurance.subject }})</p>
+
+    <form action="" method="post">
+        {% csrf_token %}
+        <input class="custom-btn" type="submit" value="Delete insurance">
+    </form>
+
+{% endblock section %}

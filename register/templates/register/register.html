@@ -1,0 +1,13 @@
+{% extends 'clients/layout.html' %}
+
+{% block title %}Register{% endblock title %}
+
+{% block section %}
+    <h1>Register</h1>
+    <hr>
+    <form action="" method="post" autocomplete="off">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="custom-btn" type="submit" value="Register">
+    </form>
+{% endblock section %}
